@@ -1,0 +1,7 @@
+{
+  "name": "sunlight",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

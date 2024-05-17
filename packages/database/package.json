@@ -1,0 +1,20 @@
+{
+  "name": "@sunlight/db",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@types/pg": "^8.11.6",
+    "drizzle-kit": "^0.21.2",
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.10",
+    "drizzle-zod": "^0.5.1",
+    "pg": "^8.11.5",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
