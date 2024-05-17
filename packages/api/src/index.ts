@@ -1,6 +1,5 @@
 import { Hono } from 'hono'
 import { createBunWebSocket } from 'hono/bun'
-import { jwt } from 'hono/jwt'
 import { WebsocketHeartbeatInterval, WebsocketHello, WebsocketResponse } from '@sunlight/utilities'
 
 import api from './api'
@@ -8,12 +7,9 @@ import api from './api'
 import { parseAndValidateMessage } from './util'
 
 const { upgradeWebSocket, websocket } = createBunWebSocket()
-const authentication = jwt({
-  secret: 'this-is-a-test-secret-please-dont-push-me-k-thx-bye'
-})
+
 
 const app = new Hono()
-// app.use('/v1', authentication)
 app.route('/v1', api)
 
 app.get('/healthz', (c) => {
@@ -22,10 +18,7 @@ app.get('/healthz', (c) => {
 
 app.get(
   '/ws',
-  // Authentication works with websocket, needs Authorization: Bearer <key> . 
-  authentication,
   upgradeWebSocket((c) => {
-    const payload = c.get('jwtPayload')
     let checkedIn: Boolean = false;
     let heartbeat: Timer;
     return {
@@ -49,7 +42,7 @@ app.get(
           return;
         }
 
-        console.debug(JSON.stringify({ ...payload, data }))
+        console.debug(JSON.stringify({ data }))
         ws.send('Hello from server!')
       },
       onClose: () => {
@@ -60,9 +53,8 @@ app.get(
   })
 )
 
-const port = 3000
 export default {
-  port,
+  port: process.env.PORT ?? 3000,
   fetch: app.fetch,
   websocket
 }
