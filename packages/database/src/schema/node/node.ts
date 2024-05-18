@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { integer, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { interfaceTypes, statusTypes } from "./constants";
@@ -12,7 +12,8 @@ export const node = pgTable(
         id: integer('id').primaryKey(),
         name: text('name').notNull(),
         description: text('description'),
-        status: statusEnum('status').default('missing'),
+        status: statusEnum('status').default('offline'),
+        mac: text('mac').array().notNull().default(sql`'{}'::text[]`),
 
         createdAt: timestamp('created_at').defaultNow(),
         updatedAt: timestamp('updated_at').defaultNow(),

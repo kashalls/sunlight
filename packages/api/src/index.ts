@@ -1,22 +1,20 @@
 import { Hono } from 'hono'
 import { createBunWebSocket } from 'hono/bun'
-import { WebsocketHeartbeatInterval, WebsocketHello, WebsocketResponse } from '@sunlight/utilities'
+import { WebsocketHeartbeatInterval, WebsocketHello, WebsocketResponse, parseAndValidateMessage } from '@sunlight/utilities'
 
 import api from './api'
-
-import { parseAndValidateMessage } from './util'
 
 const { upgradeWebSocket, websocket } = createBunWebSocket()
 
 
-const app = new Hono()
+export const app = new Hono()
 app.route('/v1', api)
 
 app.get('/healthz', (c) => {
   return c.text('ok')
 })
 
-app.get(
+const wsApp = app.get(
   '/ws',
   upgradeWebSocket((c) => {
     let checkedIn: Boolean = false;
@@ -42,8 +40,7 @@ app.get(
           return;
         }
 
-        console.debug(JSON.stringify({ data }))
-        ws.send('Hello from server!')
+        console.debug(`Debug: ${JSON.stringify(data)}`)
       },
       onClose: () => {
         clearInterval(heartbeat)
@@ -53,6 +50,7 @@ app.get(
   })
 )
 
+export type WebSocketApp = typeof wsApp
 export default {
   port: process.env.PORT ?? 3000,
   fetch: app.fetch,

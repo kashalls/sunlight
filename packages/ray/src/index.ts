@@ -1,0 +1,47 @@
+import 'dotenv/config'
+import os from 'node:os'
+
+import { hc } from 'hono/client'
+import type { WebSocketApp } from '../../api/src/index'
+
+import { WebsocketHeartbeat, WebsocketResponse, parseAndValidateMessage } from '@sunlight/utilities'
+
+const hostname = os.hostname().toLocaleLowerCase()
+const mac = [...new Set(Object.values(os.networkInterfaces()).flat().filter((iface) => !iface?.internal).map((iface) => iface?.mac))]
+
+console.log(`Sunlight Ray | Hostname: "${hostname}" | MAC(s): ${mac.join(', ')}\n`)
+
+const endpoint = process.env.ENDPOINT!
+if (!endpoint) {
+    throw Error('Missing endpoint address')
+}
+
+let heartbeat: Timer;
+let connectionAttempts = 0;
+
+let client = hc<WebSocketApp>(endpoint)
+const socket = client.ws.$ws()
+
+socket.onmessage = async (event) => {
+    if (event.type !== 'message') console.log(event)
+    
+    const data = await parseAndValidateMessage(event.data, WebsocketResponse)
+    if (!data) return socket.close(1003, 'Invalid Message Data')
+    
+    if (data.op === 0 && data.d?.heartbeat_interval) {
+        clearInterval(heartbeat)
+        heartbeat = setInterval(() => {
+            return socket.send(JSON.stringify(WebsocketHeartbeat))
+        }, data.d?.heartbeat_interval as number)
+        
+        // Identify ourselves to the socket server so it can send preferred settings.
+        return socket.send(JSON.stringify({ op: 2, d: { hostname, mac }}))
+    }
+    console.log(event)
+}
+
+socket.onclose = async (event) => {
+    clearInterval(heartbeat)
+    console.log(`Lost connection to sunlight server...\nReason: ${event.code} - ${event.reason}`)
+    return process.exit(1)
+}

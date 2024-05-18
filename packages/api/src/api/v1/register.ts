@@ -10,7 +10,7 @@ register.post(
     zValidator(
         'form',
         z.object({
-
+            
         })
     ),
     (c) => {

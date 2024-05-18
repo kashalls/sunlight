@@ -3,12 +3,20 @@
   "version": "0.0.1",
   "description": "",
   "main": "src/index.ts",
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "push": "drizzle-kit push",
+    "migrate": "bun src/migrate.mts",
+    "studio": "drizzle-kit studio",
+    "env": "bun env.ts"
+  },
   "devDependencies": {
     "@types/pg": "^8.11.6",
     "drizzle-kit": "^0.21.2",
     "@types/bun": "latest"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
     "pg": "^8.11.5",
