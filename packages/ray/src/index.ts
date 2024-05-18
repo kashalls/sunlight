@@ -17,9 +17,7 @@ if (!endpoint) {
 }
 
 let heartbeat: Timer;
-let connectionAttempts = 0;
-
-let client = hc<WebSocketApp>(endpoint)
+const client = hc<WebSocketApp>(endpoint)
 const socket = client.ws.$ws()
 
 socket.onmessage = async (event) => {
