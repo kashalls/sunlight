@@ -1,0 +1,1 @@
+const { performance, PerformanceObserver } = require('perf_hooks');

@@ -1,11 +1,11 @@
 import { Hono } from 'hono'
 import { createBunWebSocket } from 'hono/bun'
-import { WebsocketHeartbeatInterval, WebsocketHello, WebsocketResponse, parseAndValidateMessage } from '@sunlight/utilities'
+import { WebsocketHeartbeatInterval, Socket, parseAndValidateMessage } from '@sunlight/utilities'
 
 import api from './api'
+import { WebsocketResponse } from '@sunlight/utilities/src/websocket/opcodes'
 
 const { upgradeWebSocket, websocket } = createBunWebSocket()
-
 
 export const app = new Hono()
 app.route('/v1', api)
@@ -19,6 +19,7 @@ const wsApp = app.get(
   upgradeWebSocket((c) => {
     let checkedIn: Boolean = false;
     let heartbeat: Timer;
+    let seq = 0;
     return {
       onOpen(_, ws) {
         heartbeat = setInterval(() => {
@@ -29,7 +30,8 @@ const wsApp = app.get(
             checkedIn = false
           }
         }, WebsocketHeartbeatInterval + 2500)
-        return ws.send(JSON.stringify(WebsocketHello))
+        ws.send(JSON.stringify({ ...Socket.Hello, seq }))
+        return seq++;
       },
       async onMessage(event, ws) {
         const data = await parseAndValidateMessage(event.data, WebsocketResponse)

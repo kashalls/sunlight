@@ -1,5 +1,6 @@
+export * as Socket from './opcodes'
+
 export * from './constants'
-export * from './heartbeat'
-export * from './hello'
-export * from './workload'
-export * from './validation'
+export * from './errors'
+export * from './util'
+

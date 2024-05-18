@@ -10,6 +10,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "hono": "^4.3.7"
+    "hono": "^4.3.7",
+    "puppeteer": "^22.9.0"
   }
 }

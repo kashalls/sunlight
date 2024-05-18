@@ -1,12 +1,29 @@
 import { z } from 'zod'
 import type { WSMessageReceive } from "hono/ws";
-import { WebsocketStates } from './constants'
+import { WebsocketHeartbeatInterval, WebsocketState } from './constants'
+import { PuppeteerOptions, WorkloadRequestDefaultOptions, WorkloadRequestHttpOptions } from '../workload';
+
+export const WebsocketInit = z.object({
+    heartbeat_interval: z.number().default(WebsocketHeartbeatInterval)
+})
+
+const DataUnion = z.union([
+    WorkloadRequestDefaultOptions,
+    WorkloadRequestHttpOptions,
+    PuppeteerOptions,
+    WebsocketInit
+])
 
 export const WebsocketResponse = z.object({
     op: z.number(),
     seq: z.number().optional(),
-    t: z.enum(WebsocketStates).optional(),
-    d: z.object({}).passthrough().optional()
+    t: z.enum(WebsocketState).optional(),
+    d: DataUnion.optional()
+}).refine((data) => {
+    return !(data.op === 3 && data.d !== undefined)
+}, {
+    message: 'Cannot send any data while doing a heartbeat.',
+    path: ['d']
 })
 
 function safeJsonParse<T>(json: string): T | null {
