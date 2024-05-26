@@ -1,10 +1,10 @@
 import { z } from 'zod'
-import { Opcode } from './constants'
+import { Codes } from './constants'
 
 export const Heartbeat = {
-    op: Opcode.Heartbeat
+    op: Codes.Heartbeat
 }
 
 export const HeartbeatSchema = z.object({
-    op: z.literal(Opcode.Heartbeat)
+    op: z.literal(Codes.Heartbeat)
 })

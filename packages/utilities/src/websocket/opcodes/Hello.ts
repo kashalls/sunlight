@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { Opcode } from './constants'
+import { Codes } from './constants'
 import { WebsocketHeartbeatInterval, WebsocketState } from '../constants'
 
 export const Hello = {
-    op: Opcode.Hello,
+    op: Codes.Hello,
     seq: 0,
     t: "INIT_STATE" as WebsocketState,
     d: {
@@ -12,7 +12,7 @@ export const Hello = {
 }
 
 export const HelloSchema = z.object({
-    op: z.literal(Opcode.Hello),
+    op: z.literal(Codes.Hello),
     seq: z.number().positive(),
     t: z.enum(WebsocketState).default('INIT_STATE'),
     d: z.object({

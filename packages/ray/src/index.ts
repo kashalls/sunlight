@@ -2,7 +2,7 @@ import 'dotenv/config'
 import os from 'node:os'
 
 import { hc } from 'hono/client'
-import type { WebSocketApp } from '../../api/src/index'
+import type { WebSocketApp } from '../../api/src/server'
 
 import { Socket, parseAndValidateMessage } from '@sunlight/utilities'
 
@@ -17,34 +17,35 @@ if (!endpoint) {
 }
 
 let heartbeat: Timer;
+let seq;
 const client = hc<WebSocketApp>(endpoint)
 const socket = client.ws.$ws()
 
 socket.onmessage = async (event) => {
     if (event.type !== 'message') console.log(event)
-    
-    const data = await parseAndValidateMessage(event.data, Socket.WebsocketResponse)
-    if (!data) return socket.close(1003, 'Invalid Message Data')
-    
-    if (data.op === 0) {
-        if (data.d?.heartbeat_interval) {
-            // Init Socket and Initialize Heartbeat
-            clearInterval(heartbeat)
-            heartbeat = setInterval(() => {
-                return socket.send(JSON.stringify(Socket.Heartbeat))
-            }, data.d?.heartbeat_interval as number)
-            
-            // Identify ourselves to the socket server so it can send preferred settings.
-            return socket.send(JSON.stringify({ op: 2, d: { hostname, mac }}))
-        }
 
+    const data = await parseAndValidateMessage(event.data, Socket.Response)
+    if (!data) return socket.close(1003, 'Invalid Message Data')
+
+    if (data.op === 1) {
+        // Init Socket and Initialize Heartbeat
+        clearInterval(heartbeat)
+        heartbeat = setInterval(() => {
+            return socket.send(JSON.stringify(Socket.Heartbeat))
+        }, data.d?.heartbeat_interval)
+
+        // Identify ourselves to the socket server so it can send preferred settings.
+        return socket.send(JSON.stringify({ op: Socket.Codes.Initialize, d: { hostname, mac } }))
+    }
+
+    if (data.op === 0) {
         if (data.t === 'INIT_STATE') {
             // The server has set new preferences.
         }
 
         if (data.t === 'WORKLOAD_REQUEST') {
             const workload = data.d
-            if (workload) {}
+            if (workload) { }
         }
     }
     console.log(event)

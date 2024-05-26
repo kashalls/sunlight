@@ -1,21 +1,24 @@
 import { z } from 'zod'
-import { Opcode } from './constants'
+import { Codes } from './constants'
 import { WebsocketHeartbeatInterval, WebsocketState } from '../constants'
 
+// Client Send Only
 export const Initialize = {
-    op: Opcode.Event,
+    op: Codes.Initialize,
     seq: 0,
     t: "INIT_STATE" as WebsocketState,
     d: {
-        heartbeat_interval: WebsocketHeartbeatInterval
+        hostname: '',
+        mac: []
     }
 }
 
 export const InitializeSchema = z.object({
-    op: z.literal(Opcode.Initialize),
+    op: z.literal(Codes.Initialize),
     seq: z.number().positive(),
     t: z.enum(WebsocketState).default("INIT_STATE"),
     d: z.object({
-        heartbeat_interval: z.number().default(WebsocketHeartbeatInterval)
+        hostname: z.string(),
+        mac: z.array(z.string()).default([])
     })
 })

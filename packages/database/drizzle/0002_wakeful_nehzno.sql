@@ -1,0 +1,1 @@
+ALTER TABLE "report" ALTER COLUMN "status" SET DATA TYPE status;
