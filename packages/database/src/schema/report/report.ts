@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 
 import { integer, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
-import { node } from "../node";
+import { node } from "../nodes";
 import { device } from "../devices";
 
 export const reportStatus = [

@@ -15,9 +15,6 @@ const tabs = [
     label: 'Tests',
     to: '/tests'
   }, {
-    label: 'Reports',
-    to: '/reports'
-  }, {
     label: 'Settings',
     to: '/settings'
   }

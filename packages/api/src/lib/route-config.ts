@@ -12,7 +12,7 @@ export type Route<
     R extends Omit<RouteOptions, 'path'> & {
         path: P;
     },
-> = ReturnType<typeof createRoute<P, Omit<R, 'guard'>>>;
+> = ReturnType<typeof createRoute<P, Omit<R, ''>>>;
 
 export const createRouteConfig = <
     P extends string,

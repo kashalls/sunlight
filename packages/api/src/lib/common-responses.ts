@@ -9,7 +9,7 @@ export const successResponseWithoutDataSchema = z.object({
     success: z.boolean()
 })
 
-export const successResponseWithDataSchema = <T extends z.ZodTypeAny>(schema: T) => z.object({ sucess: z.boolean(), data: schema });
+export const successResponseWithDataSchema = <T extends z.ZodTypeAny>(schema: T) => z.object({ success: z.boolean(), data: schema });
 
 export const successResponseWithPaginationSchema = <T extends z.ZodTypeAny>(schema: T) =>
     z.object({

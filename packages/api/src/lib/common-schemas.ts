@@ -3,14 +3,7 @@ import { z } from 'zod';
 export const idSchema = z.number();
 
 export const errorSchema = z.object({
-    message: z.string().optional(),
-    type: z.string(),
-    status: z.number(),
-    severity: z.string(),
-    logId: z.string().optional(),
-    path: z.string().optional(),
-    method: z.string().optional(),
-    timestamp: z.string().optional(),
+    message: z.string().optional()
 });
 
 export const errorResponseSchema = z.object({
@@ -59,18 +52,6 @@ export const validDomainsSchema = z
 
 export const userParamSchema = z.object({
     user: idSchema,
-});
-
-export const organizationParamSchema = z.object({
-    organization: idSchema,
-});
-
-export const workspaceParamSchema = z.object({
-    workspace: idSchema,
-});
-
-export const projectParamSchema = z.object({
-    project: idSchema,
 });
 
 export const imageUrlSchema = z

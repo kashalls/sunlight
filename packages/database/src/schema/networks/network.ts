@@ -1,11 +1,13 @@
 import { relations } from "drizzle-orm";
-import { text, integer, pgTable } from "drizzle-orm/pg-core";
-import { node } from "../node";
+import { text, integer, pgTable, serial, timestamp } from "drizzle-orm/pg-core";
+import { node } from "../nodes";
 
 export const network = pgTable('network', {
-    id: integer('id').primaryKey(),
+    id: serial('id').primaryKey(),
     ssid: text('ssid').notNull(),
-    password: text('password'),
+    password: text('password').default(''),
+
+    createdAt: timestamp('created_at').defaultNow().notNull()
 })
 
 export const networkRelations = relations(network, ({ many }) => ({

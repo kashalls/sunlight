@@ -5,6 +5,7 @@ export const env = createEnv({
     server: {
         // API
         PORT: z.string().optional().default('4000'),
+        STATIC_FILES: z.string().optional().default('/sunlight/static'),
         
         // Database
         POSTGRES_URL: z.string(),
