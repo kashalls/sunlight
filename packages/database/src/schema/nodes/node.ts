@@ -31,7 +31,7 @@ export const nodeTests = pgTable('node_tests', {
     nodeId: integer('node_id').notNull().references(() => node.id),
     testId: integer('test_id').notNull().references(() => test.id),
 }, (t) => ({
-    pk: primaryKey(t.nodeId, t.testId)
+    pk: primaryKey({ columns: [t.nodeId, t.testId] })
 }))
 
 export const nodeRelations = relations(node, ({ one, many }) => ({
