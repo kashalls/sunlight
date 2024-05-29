@@ -1,6 +1,6 @@
 import { integer, json, pgEnum, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { testTypes } from "./constants";
-import { node, nodeTests } from "../nodes";
+import { node, nodesToTests } from "../nodes";
 import { Many, relations } from "drizzle-orm";
 import { device } from "../devices";
 
@@ -27,5 +27,5 @@ export const testRelations = relations(test, ({ one, many }) => ({
         fields: [test.id],
         references: [device.id]
     }),
-    nodeTests: many(nodeTests)
+    nodeTests: many(nodesToTests)
 }))

@@ -27,18 +27,22 @@ export const node = pgTable(
     }
 )
 
-export const nodeTests = pgTable('node_tests', {
+export const nodeRelations = relations(node, ({ one, many }) => ({
+    network: one(network, {
+        fields: [node.networkId],
+        references: [network.id]
+    }),
+    nodeTests: many(nodesToTests),
+}))
+
+export const nodesToTests = pgTable('node_to_tests', {
     nodeId: integer('node_id').notNull().references(() => node.id),
     testId: integer('test_id').notNull().references(() => test.id),
 }, (t) => ({
     pk: primaryKey({ columns: [t.nodeId, t.testId] })
 }))
 
-export const nodeRelations = relations(node, ({ one, many }) => ({
-    network: one(network, {
-        fields: [node.networkId],
-        references: [network.id]
-    }),
-    nodeTests: many(nodeTests),
-}))
-
+export const nodesToTestsRelations = relations(nodesToTests, ({ one }) => ({
+    node: one(node, { fields: [nodesToTests.nodeId], references: [node.id] }),
+    test: one(test, { fields: [nodesToTests.testId], references: [test.id] }),
+  }));
