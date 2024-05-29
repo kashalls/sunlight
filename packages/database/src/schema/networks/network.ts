@@ -7,7 +7,8 @@ export const network = pgTable('network', {
     ssid: text('ssid').notNull(),
     password: text('password').default(''),
 
-    createdAt: timestamp('created_at').defaultNow().notNull()
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
 export const networkRelations = relations(network, ({ many }) => ({

@@ -24,7 +24,7 @@ export const report = pgTable('report', {
     updatedAt: timestamp('updated_at').defaultNow(),
 })
 
-export const reportRelation = relations(report, ({ one }) => ({
+export const reportRelation = relations(report, ({ one, many }) => ({
     device: one(device, {
         fields: [report.deviceId],
         references: [device.id]
