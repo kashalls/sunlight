@@ -1,6 +1,6 @@
 export const WebsocketState = [
     "INIT_STATE",   // This is the first time the server/client is sending this data.
-    "UPDATE", // New node settings
+    "CONFIG_UPDATE", // New node settings
     "WORKLOAD_REQUEST", // The server has work for the client.
     "WORKLOAD_RESULT" // The client is reporting back on the work.
 ] as const;

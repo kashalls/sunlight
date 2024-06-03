@@ -3,7 +3,7 @@ import { Codes, DefaultOptions, HttpOptions, PuppeteerOptions } from './constant
 import { WebsocketState, WebsocketHeartbeatInterval } from '../constants'
 
 export const HeartbeatData = z.object({
-    heartbeat_interval: z.number().positive().default(WebsocketHeartbeatInterval)
+    heartbeat_interval: z.literal(WebsocketHeartbeatInterval)
 })
 
 const DUnion = z.union([
@@ -18,4 +18,17 @@ export const Response = z.object({
     seq: z.number().positive().optional(),
     t: z.enum(WebsocketState).optional(),
     d: z.optional(DUnion)
+}).refine((data) => {
+    if (data.op === 1) {
+        return HeartbeatData.safeParse(data.d).success
+    }
+
+    if (data.op === 3) {
+        return data.d === undefined
+    }
+
+    return true
+}, {
+    message: "Invalid data for given op code",
+    path: ["d"]
 })

@@ -16,7 +16,7 @@ export const node = pgTable(
         name: text('name').notNull(),
         description: text('description'),
         status: statusEnum('status').default('offline'),
-        mac: text('mac').array().notNull().default(sql`'{}'::text[]`),
+        mac: text('mac').array().notNull(),
         discovery: discoveryEnum('discovery').default('other'),
 
         networkId: integer('network_id').references(() => network.id).notNull(),

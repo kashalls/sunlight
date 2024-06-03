@@ -1,4 +1,4 @@
-import { createSelectSchema } from 'drizzle-zod';
+import { createSelectSchema, createInsertSchema } from 'drizzle-zod';
 import { z } from 'zod';
 
 import { discoveryTypes, interfaceTypes, statusTypes } from './constants';
@@ -15,6 +15,11 @@ export const selectNodeSchema = createSelectSchema(node).extend({
         .default("unknown")
         .transform((val) => val ?? "unknown"),
 });
+export const insertNodeSchema = createInsertSchema(node).extend({
+    mac: z
+        .array(z.string())
+        .default([])
+})
 
 export type Node = z.infer<typeof selectNodeSchema>;
 export type NodeInterface = z.infer<typeof nodeInterfaceSchema>;

@@ -2,8 +2,7 @@ import 'dotenv/config'
 import os from 'node:os'
 
 import { hc } from 'hono/client'
-import type { WebSocketApp } from '../../api/src/server'
-
+import type { WebSocketApp } from '@sunlight/api/src/middleware'
 import { Socket, parseAndValidateMessage } from '@sunlight/utilities'
 
 const hostname = os.hostname().toLocaleLowerCase()
@@ -32,7 +31,7 @@ socket.onmessage = async (event) => {
         clearInterval(heartbeat)
         heartbeat = setInterval(() => {
             return socket.send(JSON.stringify(Socket.Heartbeat))
-        }, data.d?.heartbeat_interval)
+        }, 30000)
 
         // Identify ourselves to the socket server so it can send preferred settings.
         return socket.send(JSON.stringify({ op: Socket.Codes.Initialize, d: { hostname, mac } }))
