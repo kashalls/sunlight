@@ -18,10 +18,13 @@ These items were picked to recreate the "ideal" starter network to be on-par wit
 - [UniFi U7 Pro](https://store.ui.com/us/en/pro/category/all-wifi/products/u7-pro)*** - $189.00
 - [10 Gbps SFP+ Direct Attach Cable](https://store.ui.com/us/en/pro/category/accessories-cables-dacs/collections/accessories-pro-direct-attach-cables/products/10gbps-direct-attach-cable?variant=uacc-dac-sfp10-1m)*\*** - $15.00
 - [UniFi Pro Max 16](https://store.ui.com/us/en/pro/category/all-switching/products/usw-pro-max-16) - $279.00
+- [Minisforum MS-01](https://store.minisforum.com/products/minisforum-ms-01?sscid=51k8_glrqb&variant=44385972191477) - $679.00
 
 *** At the time of purchase, the U7 Pro was the only sourceable WiFi 7 access point available by UniFi. If we had waited, I would have prefered to go with the U7 Pro Max which offers 4x4 as compared to 2x2 on 5Ghz (which the Pi likes to idle on).
 
 **** Used to link the UDM to the Pro Max Switch
+
+We chose the Minisforum MS-01 for its wide range of connection abilities since it had 2x 10GbE SFP+ and 2x 2.5GbE ports. We purchased the i9-12900H and 32GB + 1TB SSD variant.
 
 ## Networking 
 
@@ -30,6 +33,8 @@ I did keep the Device Identification and Traffic Identification options enabled 
 
 - RSTP Enabled
 - IoT Auto-Discovery Enabled
+
+## Setting Up The 
 
 ## Setting Up The Nodes (Raspberry Pi 5)
 
