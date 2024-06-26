@@ -60,3 +60,8 @@ dtoverlay=disable-wifi
 
 - `sudo apt install network-manager`
     - Allows us to use nmcli command to change wifi.
+
+- `sudo nmcli d wifi connect "MyWiFiName" password "MyWiFiPassword"`
+
+Notes:
+- `warning: lshw uses wireless extensions which will stop working for Wi-Fi 7 hardware; use nl80211`
