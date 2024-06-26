@@ -1,3 +1,9 @@
+<script setup lang="ts">
+definePageMeta({
+    layout: 'settings'
+})
+</script>
+
 <template>
     <div class="grid gap-6">
         <DataTable :data="tasks" :columns="columns" />

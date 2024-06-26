@@ -24,7 +24,6 @@ export default defineWebSocketHandler({
         console.log(JSON.stringify(data))
 
         if (data.op === ProtocolOp.Initialize) {
-            if ()
 
         }
         const data = JSON.parse(message.text())
