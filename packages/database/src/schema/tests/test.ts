@@ -1,16 +1,16 @@
 import { integer, json, pgEnum, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { testTypes } from "./constants";
 import { node, nodesToTests } from "../nodes";
-import { Many, relations } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { device } from "../devices";
 
-const type = pgEnum('type', testTypes)
+export const typeEnum = pgEnum('type', testTypes)
 
 export const test = pgTable('test', {
     id: serial('id').primaryKey(),
     deviceId: integer('device_id').notNull().references(() => device.id),
 
-    type: type('type').notNull(),
+    type: typeEnum('type').notNull(),
     host: text('host').notNull(),
     port: integer('port').notNull(),
     options: json('options').notNull(),

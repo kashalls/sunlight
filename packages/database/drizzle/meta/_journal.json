@@ -5,57 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1715981557440,
-      "tag": "0000_clumsy_annihilus",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1716416348123,
-      "tag": "0001_small_bushwacker",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1716416469250,
-      "tag": "0002_wakeful_nehzno",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1716484242798,
-      "tag": "0003_wonderful_mystique",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1716484270891,
-      "tag": "0004_illegal_strong_guy",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1716485917398,
-      "tag": "0005_far_jocasta",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "6",
-      "when": 1716696779725,
-      "tag": "0006_tricky_banshee",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "6",
-      "when": 1717009633834,
-      "tag": "0007_unusual_pet_avengers",
+      "when": 1720663388272,
+      "tag": "0000_happy_sister_grimm",
       "breakpoints": true
     }
   ]
