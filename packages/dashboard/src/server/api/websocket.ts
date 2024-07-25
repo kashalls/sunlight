@@ -26,7 +26,7 @@ export default defineWebSocketHandler({
         if (data.op === ProtocolOp.Initialize) {
 
         }
-        const data = JSON.parse(message.text())
+        // const data = JSON.parse(message.text())
         if (data.op === ProtocolOp.Initialize) {
             for (const subscription of data.d) {
                 peer.subscribe(subscription)

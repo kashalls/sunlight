@@ -5,7 +5,7 @@ module.exports = {
   darkMode: ["class"],
   safelist: ["dark"],
   prefix: "",
-  
+
   theme: {
     container: {
       center: true,
@@ -51,7 +51,7 @@ module.exports = {
         },
       },
       borderRadius: {
-      	xl: "calc(var(--radius) + 4px)",
+        xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",

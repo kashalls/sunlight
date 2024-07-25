@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Table } from '@tanstack/vue-table'
 import { computed } from 'vue'
-import type { Task } from '../data/schema'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -14,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 interface DataTableViewOptionsProps {
-  table: Table<Task>
+  table: Table<any>
 }
 
 const props = defineProps<DataTableViewOptionsProps>()
@@ -39,7 +38,7 @@ const columns = computed(() => props.table.getAllColumns()
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end" class="w-[150px]">
-      <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+      <DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
       <DropdownMenuCheckboxItem

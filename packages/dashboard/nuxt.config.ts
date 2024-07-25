@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
   modules: ['nuxt-icon', "@nuxtjs/tailwindcss", "shadcn-nuxt", "@nuxtjs/color-mode"],
+
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -14,12 +15,23 @@ export default defineNuxtConfig({
      */
     componentDir: './src/components/ui'
   },
+
   colorMode: {
     classSuffix: ''
   },
+
   nitro: {
     experimental: {
+      openAPI: true,
       websocket: true
+    },
+    
+    openAPI: {
+      meta: {
+        title: 'Hello'
+      }
     }
-  }
+  },
+
+  compatibilityDate: "2024-07-10"
 })

@@ -5,8 +5,8 @@ import { statusTypes, type Node } from '@sunlight/db';
 
 import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
-import DataTableColumnHeader from '@/components/DataTableColumnHeader.vue'
-import DataTableRowActions from '@/components/DataTableRowActions.vue'
+import DataTableColumnHeader from '~/components/datatable/ColumnHeader.vue'
+import DataTableRowActions from '~/components/datatable/RowActions.vue'
 
 const { data, error, refresh } = await useFetch('/api/nodes', {
     pick: ['data']

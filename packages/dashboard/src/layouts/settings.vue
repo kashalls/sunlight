@@ -72,7 +72,7 @@ const sidebarNavItems: Item[] = [
                             </Button>
                         </nav>
                     </aside>
-                    <div class="flex-1 lg:max-w-2xl">
+                    <div class="flex-1">
                         <div class="space-y-6">
                             <slot />
                         </div>
