@@ -1,24 +1,16 @@
 import 'dotenv/config'
-import os from 'node:os'
-
-import { hc } from 'hono/client'
-import type { WebSocketApp } from '@sunlight/api/src/middleware'
+import { consola } from "consola";
+import { Client } from './Client'
+import { getHostname, getMacAddresses } from './utils/System'
 import { Socket, parseAndValidateMessage } from '@sunlight/utilities'
 
-const hostname = os.hostname().toLocaleLowerCase()
-const mac = [...new Set(Object.values(os.networkInterfaces()).flat().filter((iface) => !iface?.internal).map((iface) => iface?.mac))]
+consola.info(`Sunlight Ray | Hostname: "${getHostname()}" | MAC(s): ${getMacAddresses().join(', ')}\n`)
 
-console.log(`Sunlight Ray | Hostname: "${hostname}" | MAC(s): ${mac.join(', ')}\n`)
+const client = new Client(process.env.ENDPOINT, 'json', 'none')
+client.on('workload', () => {
+    
+})
 
-const endpoint = process.env.ENDPOINT!
-if (!endpoint) {
-    throw Error('Missing endpoint address')
-}
-
-let heartbeat: Timer;
-let seq;
-const client = hc<WebSocketApp>(endpoint)
-const socket = client.ws.$ws()
 
 socket.onmessage = async (event) => {
     if (event.type !== 'message') console.log(event)

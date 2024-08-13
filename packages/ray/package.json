@@ -4,13 +4,15 @@
   "module": "src/index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/pako": "^2.0.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "hono": "^4.3.7",
+    "consola": "^3.2.3",
+    "pako": "^2.1.0",
     "puppeteer": "^22.9.0"
   }
 }
