@@ -27,7 +27,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from '@/components/uia/table'
 
 interface DataTableProps {
   columns: ColumnDef<TData, TValue>[]

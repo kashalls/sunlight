@@ -4,7 +4,7 @@ import { h } from 'vue'
 import type { schema } from '@sunlight/db'
 import DataTableColumnHeader from '@/components/datatable/ColumnHeader.vue'
 import DataTableRowActions from '@/components/datatable/RowActions.vue'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Checkbox } from '@/components/uia/checkbox'
 
 export const searchable = 'ssid'
 

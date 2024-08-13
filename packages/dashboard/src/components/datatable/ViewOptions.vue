@@ -2,7 +2,7 @@
 import type { Table } from '@tanstack/vue-table'
 import { computed } from 'vue'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/uia/button'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/components/uia/dropdown-menu'
 
 interface DataTableViewOptionsProps {
   table: Table<any>

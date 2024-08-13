@@ -1,11 +1,11 @@
 <script setup>
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/components/uia/badge'
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger
-} from '@/components/ui/tooltip'
+} from '@/components/uia/tooltip'
 
 
 </script>

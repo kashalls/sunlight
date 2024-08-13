@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AreaChart } from '@/components/ui/chart-area'
+import { AreaChart } from '@/components/uia/chart-area'
 
 const data = [
   { name: 'Jan', upload: Math.floor(Math.random() * 2000) + 500, download: Math.floor(Math.random() * 2000) + 500 },

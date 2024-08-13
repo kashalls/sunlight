@@ -3,14 +3,14 @@ import type { Table } from '@tanstack/vue-table'
 import type { Task } from '../data/schema'
 
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/uia/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/uia/select'
 
 interface DataTablePaginationProps {
   table: Table<Task>

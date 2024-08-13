@@ -3,8 +3,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+} from '@/components/uia/avatar'
+import { Button } from '@/components/uia/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/components/uia/dropdown-menu'
 </script>
 
 <template>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { Column } from '@tanstack/vue-table'
 import { cn } from '~/lib/utils'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/uia/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/components/uia/dropdown-menu'
 
 interface DataTableColumnHeaderProps {
   column: Column<any, any>

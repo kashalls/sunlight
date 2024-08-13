@@ -5,7 +5,7 @@ import { Axis, GroupedBar, StackedBar } from '@unovis/ts'
 import { type Component, computed, ref } from 'vue'
 import { useMounted } from '@vueuse/core'
 import type { BaseChartProps } from '.'
-import { ChartCrosshair, ChartLegend, defaultColors } from '@/components/ui/chart'
+import { ChartCrosshair, ChartLegend, defaultColors } from '@/components/uia/chart'
 import { cn } from '~/lib/utils'
 
 const props = withDefaults(defineProps<BaseChartProps<T> & {

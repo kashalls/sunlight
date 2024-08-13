@@ -2,16 +2,16 @@
 import type { Column } from '@tanstack/vue-table'
 import type { Component } from 'vue'
 
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command'
+import { Badge } from '@/components/uia/badge'
+import { Button } from '@/components/uia/button'
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@/components/uia/command'
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { Separator } from '@/components/ui/separator'
+} from '@/components/uia/popover'
+import { Separator } from '@/components/uia/separator'
 import { cn } from '~/lib/utils'
 
 interface DataTableFacetedFilter {

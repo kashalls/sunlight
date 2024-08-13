@@ -3,20 +3,20 @@ import Overview from '@/components/Overview.vue'
 import DateRangePicker from '@/components/DateRangePicker.vue'
 import RecentSales from '@/components/RecentSales.vue'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/uia/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/uia/card'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@/components/ui/tabs'
+} from '@/components/uia/tabs'
 </script>
 
 <template>

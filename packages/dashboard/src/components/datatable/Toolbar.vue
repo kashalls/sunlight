@@ -3,8 +3,8 @@ import type { Table } from '@tanstack/vue-table'
 
 import DataTableFacetedFilter from '@/components/datatable/FacetedFilter.vue'
 import DataTableViewOptions from '@/components/datatable/ViewOptions.vue'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/uia/button'
+import { Input } from '@/components/uia/input'
 
 interface DataTableToolbarProps {
   searchable: string,
@@ -37,6 +37,9 @@ const isFiltered = computed(() => props.table.getState().columnFilters.length > 
         <Icon name="radix-icons:cross-2" class="ml-2 h-4 w-4" />
       </Button>
     </div>
-    <DataTableViewOptions :table="table" />
+    <div class="flex space-x-2 gap-2">
+      <tem
+      <DataTableViewOptions :table="table" />
+    </div>
   </div>
 </template>

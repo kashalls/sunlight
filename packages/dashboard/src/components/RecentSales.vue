@@ -3,7 +3,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/components/ui/avatar'
+} from '@/components/uia/avatar'
 </script>
 
 <template>
