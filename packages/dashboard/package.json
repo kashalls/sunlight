@@ -15,7 +15,7 @@
     "@tanstack/vue-table": "^8.19.2",
     "@unovis/ts": "^1.4.2",
     "@unovis/vue": "^1.4.2",
-    "@vueuse/core": "^10.11.0",
+    "@vueuse/core": "^11.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.11",
