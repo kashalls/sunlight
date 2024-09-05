@@ -12,13 +12,13 @@
   },
   "devDependencies": {
     "@types/pg": "^8.11.6",
-    "drizzle-kit": "^0.21.4",
+    "drizzle-kit": "^0.24.0",
     "@types/bun": "latest"
   },
   "dependencies": {
     "consola": "^3.2.3",
     "dotenv": "^16.4.5",
-    "drizzle-orm": "^0.30.10",
+    "drizzle-orm": "^0.33.0",
     "drizzle-zod": "^0.5.1",
     "pg": "^8.12.0",
     "zod": "^3.23.8"
