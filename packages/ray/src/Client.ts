@@ -37,6 +37,7 @@ export interface Workload {
     port?: number;
     duration?: number;
     status?: number;
+    options?: Object
 }
 
 export interface Timings {
