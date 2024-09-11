@@ -10,7 +10,7 @@ FROM base AS build
 
 ## Copy lock + package file.
 RUN ls -la
-COPY bun.lockb ./
+COPY /bun.lockb ./
 COPY ./packages/dashboard/package.json ./
 
 ## Install, copy remaining packages and build the webserver.
