@@ -1,33 +1,26 @@
+# Base Environment
 FROM oven/bun AS base
 
+## Setup a base environment. This is the root of where the app will run.
 RUN mkdir -p /sunlight
 WORKDIR /sunlight
 
-FROM base AS install
-RUN mkdir -p /temp/dev
-COPY package.json bun.lockb /temp/dev/
-RUN cd /temp/dev && bun install --frozen-lockfile
+# Build Environment
+FROM base AS build
 
-RUN mkdir -p /temp/prod
-COPY package.json bun.lockb /temp/prod/
-RUN cd /temp/prod && bun install --frozen-lockfile --production
+## Copy lock + package file.
+COPY bun.lockb ./
+COPY ./packages/dashboard/package.json ./
 
-# copy node_modules from temp directory
-# then copy all (non-ignored) project files into the image
-FROM base AS prerelease
-COPY --from=install /temp/dev/node_modules node_modules
+## Install, copy remaining packages and build the webserver.
+RUN bun install --frozen-lockfile
 COPY . .
 
-# [optional] tests & build
-ENV NODE_ENV=production
-RUN bun test
-RUN bun run build
-
-# copy production dependencies and source code into final image
+# Final Container
 FROM base AS release
-COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /sunlight/index.ts .
-COPY --from=prerelease /sunlight/package.json .
+
+## Copy build output.
+COPY --from=build /sunlight /sunlight
 
 # run the app
 USER bun
