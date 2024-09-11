@@ -18,6 +18,8 @@ client.on('workload', async (data: Workload) => {
         status: data.status,
         ...data.options
     }
+
+    consola.debug(`Ray was asked to preform ${data.task} task...`)
     if (data.task === 'IPERF') {
         // Preform Iperf Test
 
