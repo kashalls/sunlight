@@ -8,14 +8,13 @@ WORKDIR /sunlight
 # Build Environment
 FROM base AS build
 
-## Copy lock + package file.
-RUN ls -la
+# Copy bun.lockb from the root of the monorepo to the working directory
+COPY /bun.lockb /sunlight/bun.lockb
 
-COPY /bun.lockb ./
-
+# Copy package.json
 COPY ./packages/dashboard/package.json ./
 
-## Install, copy remaining packages and build the webserver.
+## Install, copy remaining packages, and build the webserver.
 RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
