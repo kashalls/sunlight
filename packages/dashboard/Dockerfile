@@ -12,12 +12,12 @@ FROM base AS build
 COPY /bun.lockb /sunlight/bun.lockb
 
 # Copy package.json
-COPY ./packages/dashboard/package.json ./
+COPY ./packages/dashboard/package.json /sunlight/package.json
 
 ## Install, copy remaining packages, and build the webserver.
 RUN bun install 
-COPY . .
-RUN bun run build
+COPY ./packages/dashboard/* /sunlight/
+RUN bunx nuxt build
 
 # Final Container
 FROM base AS release
