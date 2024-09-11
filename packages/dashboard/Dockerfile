@@ -15,7 +15,7 @@ COPY /bun.lockb /sunlight/bun.lockb
 COPY ./packages/dashboard/package.json ./
 
 ## Install, copy remaining packages, and build the webserver.
-RUN bun install --frozen-lockfile
+RUN bun install --production
 COPY . .
 RUN bun run build
 
