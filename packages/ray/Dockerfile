@@ -9,11 +9,13 @@ WORKDIR /sunlight
 FROM base AS build
 
 ## Copy lock + package file.
-COPY bun.lockb ./
-COPY ./packages/dashboard/package.json ./
+COPY /bun.lockb /sunlight/bun.lockb
 
+# Copy package.json
+COPY ./packages/ray/package.json /sunlight/package.json
 ## Install, copy remaining packages and build the webserver.
 RUN bun install --frozen-lockfile
+COPY ./packages/ray/* /sunlight/
 COPY . .
 
 # Final Container
