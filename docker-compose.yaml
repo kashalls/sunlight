@@ -1,0 +1,27 @@
+---
+version: '3.8'
+
+services:
+  iperf3:
+    image: networkstatic/iperf3
+    container_name: iperf3-server
+    command: -s
+    ports:
+      - "5201:5201"
+
+  openspeedtest:
+    image: openspeedtest/latest
+    container_name: openspeedtest-server
+    ports:
+      - "3000:80"
+
+  sunlight-dashboard:
+    image: ghcr.io/kashalls/sunlight/dashboard:latest
+    container_name: sunlight-dashboard
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - iperf3
+      - openspeedtest
