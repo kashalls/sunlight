@@ -1,29 +1,21 @@
-# Base Environment
-FROM oven/bun AS base
+FROM oven/bun AS builder
 
-## Setup a base environment. This is the root of where the app will run.
-RUN mkdir -p /sunlight
 WORKDIR /sunlight
+COPY . .
 
-# Build Environment
-FROM base AS build
+# Install monorepo dependencies
+RUN bun install
 
-# Copy bun.lockb from the root of the monorepo to the working directory
-COPY /bun.lockb /sunlight/bun.lockb
-
-# Copy package.json
-COPY ./packages/dashboard/package.json /sunlight/package.json
-
-## Install, copy remaining packages, and build the webserver.
-RUN bun install 
-COPY ./packages/dashboard/* /sunlight/
-RUN bunx nuxt build
+# Run Nuxt Build on dashboard
+RUN bunx nuxt build --cwd ./packages/dashboard
 
 # Final Container
-FROM base AS release
+FROM oven/bun
+
+WORKDIR /sunlight
 
 ## Copy build output.
-COPY --from=build /sunlight/.output /sunlight/.output
+COPY --from=builder /sunlight/packages/dashboard/.output /sunlight/.output
 
 USER bun
 EXPOSE 3000/tcp
