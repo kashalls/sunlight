@@ -31,6 +31,6 @@
     "@iconify-json/ph": "^1.2.0",
     "@iconify-json/radix-icons": "^1.2.0",
     "@nuxt/ui": "^2.18.4",
-    "nuxt": "^3.13.1"
+    "nuxt": "^3.13.2"
   }
 }
