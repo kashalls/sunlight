@@ -85,9 +85,6 @@ export class Client extends EventEmitter {
         // Socket open handler
         this.ws.addEventListener('open', () => this.opened());
 
-        // @ts-ignore
-        window.ws = this.ws;
-
         // Message listener
         this.ws.addEventListener('message', (e) => {
             const message = this.compression != 'none' ? JSON.parse(inflate(e.data, { to: 'string' })) : JSON.parse(e.data);
@@ -139,7 +136,6 @@ export class Client extends EventEmitter {
                 break;
 
             case Op.Workload:
-                //
                 this.emit('workload', data.d)
                 break;
 
@@ -148,6 +144,7 @@ export class Client extends EventEmitter {
                 break;
 
             default:
+                consola.log(`Unknown op code: ${data.op}`)
                 break;
         }
     }
