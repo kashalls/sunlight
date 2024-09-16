@@ -16,6 +16,7 @@
     "@types/bun": "latest"
   },
   "dependencies": {
+    "@t3-oss/env-core": "^0.11.1",
     "consola": "^3.2.3",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
