@@ -1,140 +1,114 @@
 <script setup lang="ts">
-import Overview from '@/components/Overview.vue'
-import DateRangePicker from '@/components/DateRangePicker.vue'
-import RecentSales from '@/components/RecentSales.vue'
+import { Tabs } from '~/components/Tables/Columns';
+const openedTab = ref(0)
+// By default, will only fetch the most recent 50 of each.
+const [networks, nodes, tests] = await Promise.all([
+  useFetch('/api/networks'),
+  useFetch('/api/nodes'),
+  useFetch('/api/tests')
+])
 
-import { Button } from '@/components/uia/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/uia/card'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/uia/tabs'
 </script>
 
 <template>
   <div class="flex-1 space-y-4 p-8 pt-6">
-    <div class="flex items-center justify-between space-y-2">
-      <h2 class="text-3xl font-bold tracking-tight">
-        Sunlight Dashboard
-      </h2>
-      <div class="flex items-center space-x-2">
-        <DateRangePicker />
+    <template v-if="tests.data.value?.total">
+      Hello
+    </template>
+
+    <div class="flex justify-between py-1">
+      <div class="flex justify-start gap-2">
+        <UTooltip text="# Of Currently Connected Nodes">
+          <UBadge color="gray" variant="solid">0 Nodes</UBadge>
+        </UTooltip>
+        <UTooltip text="Currently Selected WiFi Network">
+          <UBadge color="gray" variant="solid">Dial-Up WiFi</UBadge>
+        </UTooltip>
+      </div>
+      <div class="flex justify-center">
+        <h2 class="text-3xl font-bold tracking-tight">
+          Sunlight Dashboard
+        </h2>
+      </div>
+      <div class="flex justify-end gap-2">
+        <CreateResourceDropdown />
+        <UButton icon="i-ph-arrows-clockwise"  color="primary" variant="ghost"/>
+        <ColorMode />
       </div>
     </div>
-    <Tabs default-value="overview" class="space-y-4">
-      <TabsList>
-        <TabsTrigger value="overview">
-          Overview
-        </TabsTrigger>
-        <TabsTrigger value="analytics" disabled>
-          Analytics
-        </TabsTrigger>
-        <TabsTrigger value="reports" disabled>
-          Reports
-        </TabsTrigger>
-        <TabsTrigger value="notifications" disabled>
-          Notifications
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="overview" class="space-y-4">
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle class="text-sm font-medium">
-                Statistic 1
-              </CardTitle>
-              <Icon name="radix-icons:question-mark" class="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div class="text-2xl font-bold">
-                Statistic
-              </div>
-              <p class="text-xs text-muted-foreground">
-                Change in statistic or average.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle class="text-sm font-medium">
-                Statistic 2
-              </CardTitle>
-              <Icon name="radix-icons:question-mark" class="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div class="text-2xl font-bold">
-                Statistic
-              </div>
-              <p class="text-xs text-muted-foreground">
-                Change in statistic or average.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle class="text-sm font-medium">
-                Statistic 3
-              </CardTitle>
-              <Icon name="radix-icons:question-mark" class="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div class="text-2xl font-bold">
-                Statistic
-              </div>
-              <p class="text-xs text-muted-foreground">
-                Change in statistic or average.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle class="text-sm font-medium">
-                Statistic 4
-              </CardTitle>
-              <Icon name="radix-icons:question-mark" class="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div class="text-2xl font-bold">
-                Statistic
-              </div>
-              <p class="text-xs text-muted-foreground">
-                Change in statistic or average.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Card class="col-span-4">
-            <CardHeader>
-              <CardTitle>
-                Bandwidth Tests
-              </CardTitle>
-            </CardHeader>
-            <CardContent class="pl-2">
-              <Overview />
-            </CardContent>
-          </Card>
-          <Card class="col-span-3">
-            <CardHeader>
-              <CardTitle>Issue Tracker</CardTitle>
-              <CardDescription>
-                There's nothing here... yet.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RecentSales />
-            </CardContent>
-          </Card>
-        </div>
-      </TabsContent>
-    </Tabs>
+    <UDivider />
+
+    <div class="grid grid-cols-3 gap-2">
+      <UTabs v-model="openedTab" :items="Tabs" />
+    </div>
+    <!--<Carousel />-->
+    <!--<Tests />-->
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col gap-4">
+      <Nodes />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col gap-4">
+      <Networks />
+      <Devices />
+    </div>
+
   </div>
 </template>
+
+<style scoped>
+/* https://codepen.io/jenning/pen/YzNmzaV */
+
+.loader {
+    --color: rgb(var(--color-primary-400));
+    --size-mid: 6vmin;
+    --size-dot: 1.5vmin;
+    --size-bar: 0.4vmin;
+    --size-square: 3vmin;
+
+    display: block;
+    position: relative;
+    width: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.loader::before,
+.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+}
+
+/**
+    loader --6
+**/
+.loader.--6::before {
+    width: var(--size-square);
+    height: var(--size-square);
+    background-color: var(--color);
+    top: calc(50% - var(--size-square));
+    left: calc(50% - var(--size-square));
+    animation: loader-6 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes loader-6 {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(100%);
+    }
+
+    50% {
+        transform: translateX(100%) translateY(100%);
+    }
+
+    75% {
+        transform: translateY(100%);
+    }
+}
+</style>

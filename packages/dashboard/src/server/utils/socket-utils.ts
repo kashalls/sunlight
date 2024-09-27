@@ -9,6 +9,6 @@ export function safeJsonParse<T>(json: string): T | null {
     }
 }
 
-export async function parseMessage<T>(message: Message): <T | null> {
+export async function parseMessage<T>(message: Message) {
     const parsed = safeJsonParse(message.text())
 }

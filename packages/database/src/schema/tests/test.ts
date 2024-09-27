@@ -7,7 +7,7 @@ import { device } from "../devices";
 export const typeEnum = pgEnum('type', testTypes)
 
 export const test = pgTable('test', {
-    id: serial('id').primaryKey(),
+    id: integer('id').primaryKey(),
     deviceId: integer('device_id').notNull().references(() => device.id),
 
     type: typeEnum('type').notNull(),

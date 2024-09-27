@@ -1,6 +1,6 @@
 import { asc, count, desc, ilike } from 'drizzle-orm'
 import { z } from 'zod'
-import { schema } from '@sunlight/db'
+import { node } from '@sunlight/db'
 
 const nodesQuerySchema = z.object({
     query: z.string().optional(),
@@ -12,14 +12,14 @@ const nodesQuerySchema = z.object({
 export default defineEventHandler(async (event) => {
     const { query, order, offset, limit } = await getValidatedQuery(event, nodesQuerySchema.parse)
 
-    const filter = query ? ilike(schema.node.name, `%${query}%`) : undefined
+    const filter = query ? ilike(node.name, `%${query}%`) : undefined
 
-    const [{ total }] = await drizzle.select({ total: count() }).from(schema.node).where(filter)
+    const [{ total }] = await drizzle.select({ total: count() }).from(node).where(filter)
 
     const ordering = order === 'asc' ? asc : desc;
     const data = await drizzle.select()
-        .from(schema.node)
-        .orderBy(ordering(schema.node.name))
+        .from(node)
+        .orderBy(ordering(node.name))
         .offset(offset ?? 0)
         .limit(limit ?? 50)
 

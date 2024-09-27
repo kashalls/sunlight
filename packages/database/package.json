@@ -8,11 +8,11 @@
     "push": "drizzle-kit push",
     "migrate": "bun src/migrate.ts",
     "studio": "drizzle-kit studio",
-    "env": "bun env.ts"
+    "seed": "bun src/seed.ts"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.6",
-    "drizzle-kit": "^0.24.0",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.24.2",
     "@types/bun": "latest"
   },
   "dependencies": {
@@ -21,7 +21,7 @@
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
     "drizzle-zod": "^0.5.1",
-    "pg": "^8.12.0",
+    "pg": "^8.13.0",
     "zod": "^3.23.8"
   },
   "peerDependencies": {

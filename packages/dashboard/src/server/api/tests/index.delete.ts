@@ -1,20 +1,20 @@
 import { inArray } from 'drizzle-orm'
 import { z } from 'zod'
-import { node } from '@sunlight/db'
+import { test } from '@sunlight/db'
 
-const nodesDeleteSchema = z.object({
+const testDeleteSchema = z.object({
     items: z.array(z.number()).min(1)
 })
 
 export default defineEventHandler(async (event) => {
-    const { items } = await getValidatedQuery(event, nodesDeleteSchema.parse)
+    const { items } = await getValidatedQuery(event, testDeleteSchema.parse)
 
-    const toDelete = inArray(node.id, items)
+    const toDelete = inArray(test.id, items)
 
     try {
-        await drizzle.delete(node).where(toDelete)
+        await drizzle.delete(test).where(toDelete)
 
-        const remaining = await drizzle.select().from(node).where(toDelete)
+        const remaining = await drizzle.select().from(test).where(toDelete)
         const failed = remaining.map((row) => row.id)
         
         return { success: failed.length === 0, failed }

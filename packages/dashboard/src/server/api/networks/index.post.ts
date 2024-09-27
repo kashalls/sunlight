@@ -1,10 +1,10 @@
-import { schema } from '@sunlight/db'
+import { network, insertNetworkSchema} from '@sunlight/db'
 
 export default defineEventHandler(async (event) => {
-    const body = await readValidatedBody(event, schema.insertNetworkSchema.parse)
+    const body = await readValidatedBody(event, insertNetworkSchema.parse)
 
     try {
-        const result = await drizzle.insert(schema.network).values(body).returning();
+        const result = await drizzle.insert(network).values(body).returning();
 
         if (result.length === 1) {
             return { success: true }

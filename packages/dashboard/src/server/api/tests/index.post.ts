@@ -1,10 +1,10 @@
-import { node, insertNodeSchema } from '@sunlight/db'
+import { test, insertTestSchema } from '@sunlight/db'
 
 export default defineEventHandler(async (event) => {
-    const body = await readValidatedBody(event, insertNodeSchema.parse)
+    const body = await readValidatedBody(event, insertTestSchema.parse)
 
     try {
-        const result = await drizzle.insert(node).values(body).returning();
+        const result = await drizzle.insert(test).values(body).returning();
 
         if (result.length === 1) {
             return { success: true }

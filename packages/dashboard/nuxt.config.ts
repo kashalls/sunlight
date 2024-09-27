@@ -3,20 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
   modules: [
-    "shadcn-nuxt",
     "@nuxt/ui"
   ],
-  shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
-    prefix: '',
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: './src/components/uia'
-  },
   colorMode: {
     classSuffix: ''
   },

@@ -12,7 +12,7 @@ export const discoveryEnum = pgEnum('discovery', discoveryTypes)
 export const node = pgTable(
     "node",
     {
-        id: serial('id').primaryKey(),
+        id: integer('id').primaryKey(),
         name: text('name').notNull(),
         description: text('description'),
         status: statusEnum('status').default('offline'),

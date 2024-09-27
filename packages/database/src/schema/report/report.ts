@@ -1,6 +1,6 @@
 import { relations } from "drizzle-orm";
 
-import { integer, pgEnum, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+import { pgEnum, pgTable, integer, text, timestamp } from 'drizzle-orm/pg-core'
 
 import { node } from "../nodes";
 import { device } from "../devices";
@@ -9,7 +9,7 @@ import { reportStatus } from "./constants";
 const reportStatusEnum = pgEnum('status', reportStatus)
 
 export const report = pgTable('report', {
-    id: serial('id').primaryKey(),
+    id: integer('id').primaryKey(),
     deviceId: integer('device_id').notNull().references(() => device.id),
     status: reportStatusEnum('status').notNull(),
     title: text('title').notNull(),
