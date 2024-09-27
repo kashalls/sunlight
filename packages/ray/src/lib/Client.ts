@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import { inflate, deflate } from 'pako';
 import { consola } from "consola";
+import { SUNLIGHT_DEFAULT } from './Constants';
 enum Op {
     Init,
     Heartbeat,
@@ -66,7 +67,7 @@ export interface Client {
 }
 
 export class Client extends EventEmitter {
-    constructor(url = 'ws://sunlight.internal', encoding = 'json', compression = 'zlib') {
+    constructor(url = `ws://${SUNLIGHT_DEFAULT}`, encoding = 'json', compression = 'zlib') {
         super();
 
         this.compression = compression;

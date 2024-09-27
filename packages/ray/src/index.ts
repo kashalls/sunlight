@@ -1,11 +1,11 @@
 import 'dotenv/config'
 import { consola } from "consola";
-import { Client, type Workload } from './Client'
-import { getHostname, getMacAddresses } from './utils/System'
+import { Client, type Workload } from './lib/Client'
+import { getHostname, getMacAddresses } from './lib/utils/System'
 import { Socket, parseAndValidateMessage } from '@sunlight/utilities'
-import { changeWifi } from './utils/WiFi';
+import { changeWifi } from './lib/utils/WiFi';
 
-import { runIPerf3 } from './utils/iPerf3';
+import { runIPerf3 } from './tasks/iPerf3';
 
 consola.info(`Sunlight Ray | Hostname: "${getHostname()}" | MAC(s): ${getMacAddresses().join(', ')}\n`)
 
